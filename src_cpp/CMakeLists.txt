@@ -81,7 +81,9 @@ set(libsrc
 if(NOT ${BUILD_SHARED_LIBS})
     message("Building STATIC Library")
     add_library(${PROJECT_NAME}_static STATIC ${libsrc})
+	if(WIN32)
 		target_link_libraries(${PROJECT_NAME}_static Dwmapi)
+	endif()
 else()
   message("Building SHARED Library")
   
