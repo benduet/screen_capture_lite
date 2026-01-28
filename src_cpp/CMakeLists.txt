@@ -32,7 +32,7 @@ elseif(APPLE)
         ../include/ios/NSMouseProcessor.h
         ios/CGFrameProcessor.cpp
         ../include/ios/CGFrameProcessor.h
-        ios/GetMonitors.cpp
+        ios/GetMonitors.mm
         ios/ThreadRunner.cpp
     )
     set(SCREEN_CAPTURE_PLATFORM_INC
