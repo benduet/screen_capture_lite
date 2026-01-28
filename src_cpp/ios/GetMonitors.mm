@@ -8,7 +8,7 @@ namespace SL{
     namespace Screen_Capture{
 
         // Get the localized display name from NSScreen (e.g., "Built-in Retina Display", "LG UltraFine")
-        static std::string GetDisplayName(CGDirectDisplayID displayID) {
+        static std::string GetDisplayName(CGDirectDisplayID displayID, int displayIndex) {
             @autoreleasepool {
                 uint32_t unitNumber = CGDisplayUnitNumber(displayID);
 
@@ -26,8 +26,8 @@ namespace SL{
                     }
                 }
 
-                // Fallback to generic name
-                return std::string("Display");
+                // Fallback to generic name for older macOS
+                return std::string("Display ") + std::to_string(displayIndex + 1);
             }
         }
 
@@ -51,7 +51,7 @@ namespace SL{
                     CGDisplayModeRelease(dismode);
                     auto r = CGDisplayBounds(displays[i]);
                     auto scale = static_cast<float>(width)/static_cast<float>(r.size.width);
-                    auto name = GetDisplayName(displays[i]);
+                    auto name = GetDisplayName(displays[i], static_cast<int>(ret.size()));
                     ret.push_back(CreateMonitor(static_cast<int>(ret.size()), displays[i],height,width, int(r.origin.x), int(r.origin.y), name, scale));
                 }
             }
